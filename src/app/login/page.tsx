@@ -5,7 +5,7 @@ const page: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className="mb-5 ml-[30%] mr-[30%]  mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
+      <div className="mb-5 ml-[35%] mr-[35%]  mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
         <form>
           <h2 className=" text-center text-3xl font-semibold">Login</h2>
           <p className="mt-4 text-center text-xl font-medium">
