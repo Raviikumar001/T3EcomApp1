@@ -1,0 +1,93 @@
+<!-- otpEmailTemplate.html
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- ... -->
+
+<!-- ... -->
+
+<!doctype html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Responsive OTP Template</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: #ffffff;
+        font-size: 14px;
+      }
+      .container {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 45px 30px 60px;
+        background: #f4f7ff;
+        background-image: url(https://images.unsplash.com/photo-1715276611505-fbea90d3e9e3?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+        font-size: 14px;
+        color: #434343;
+      }
+      .content {
+        margin: 70px 0 0;
+        padding: 92px 30px 115px;
+        background: #ffffff;
+        border-radius: 30px;
+        text-align: center;
+        max-width: 489px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 500;
+        color: #1f1f1f;
+      }
+      p {
+        margin: 17px 0 0;
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .otp {
+        margin: 60px 0 0;
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: 25px;
+        color: #ba3d4f;
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 30px 15px;
+          background-size: cover;
+          background-position: center;
+        }
+        .content {
+          padding: 60px 15px;
+        }
+        .otp {
+          font-size: 30px;
+          letter-spacing: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <div class="content">
+          <h1>Welcome</h1>
+          <p>Hey, {{user_name}}!</p>
+          <p>Thank you for choosing Us. You have successfully registred.</p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

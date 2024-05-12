@@ -3,7 +3,12 @@ import { useRouter } from "next/navigation";
 import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
 import ShopKart from "./_components/SvgFiles";
-export default function Home() {
+export default async function Home() {
+  // const hello = await api.auth.signup({
+  //   name: "ravi",
+  //   email: "hello@gmail.com",
+  //   password: "helloravi",
+  // });
   return (
     <>
       <div>

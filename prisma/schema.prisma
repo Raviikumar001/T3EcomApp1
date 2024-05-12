@@ -12,11 +12,51 @@ datasource db {
     // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
+model User {
+    id             Int              @id @default(autoincrement())
+    name           String
+    email          String           @unique
+    hashedPassword String
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime?        @updatedAt
+    categories     UserCategories[] @relation("Categories")
+    otps           otp[]
+    isVerified     Boolean          @default(false)
 }
+
+model Category {
+    id          Int     @id @default(autoincrement())
+    name        String  @unique
+    description String?
+
+    @@index([id])
+}
+
+model UserCategories {
+    id         Int    @id @default(autoincrement())
+    userId     Int
+    categoryId String
+
+    User User @relation("Categories", fields: [userId], references: [id])
+}
+
+model otp {
+    id         Int      @id @default(autoincrement())
+    email      String
+    otp        String
+    createdAt  DateTime @default(now())
+    expiresAt  DateTime
+    isVerified Boolean  @default(false)
+
+    user User @relation(fields: [email], references: [email])
+}
+
+// model otp {
+//     id         Int      @id @default(autoincrement())
+//     email      String
+//     otp        String
+//     createdAt  DateTime @default(now())
+//     isVerified Boolean  @default(false)
+
+//     user User @relation(fields: [email], references: [email])
+// }

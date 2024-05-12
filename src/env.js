@@ -8,6 +8,11 @@ export const env = createEnv({
    */
   server: {
     DATABASE_URL: z.string().url(),
+    USERID: z.string(),
+    PASS: z.string(),
+    JWT_SECRET: z.string(),
+    HOST: z.string(),
+
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -28,7 +33,11 @@ export const env = createEnv({
    */
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
+    USERID: process.env.USERID,
+    PASS: process.env.PASS,
     NODE_ENV: process.env.NODE_ENV,
+    JWT_SECRET: process.env.JWT_SECRET,
+    HOST: process.env.HOST,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
