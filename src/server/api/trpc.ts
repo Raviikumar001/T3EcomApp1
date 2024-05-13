@@ -9,7 +9,9 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { env } from "../../env.js";
 
+import jwt from "jsonwebtoken";
 import { db } from "~/server/db";
 
 /**
@@ -73,6 +75,59 @@ export const createCallerFactory = t.createCallerFactory;
  */
 export const createTRPCRouter = t.router;
 
+//PROTECTED PROCEDURE
+// const isAuthenticated = t.middleware(async ({ ctx, next }) => {
+//   const authHeader = ctx?.headers?.get("Authorization");
+//   if (!authHeader) {
+//     throw new Error("Authorization header missing");
+//   }
+//   console.log(authHeader)
+//   const [, token] = authHeader.split(" ");
+//   if (!token) {
+//     throw new Error("Authorization token missing");
+//   }
+
+//   try {
+//     const decoded = jwt.verify(token, env.JWT_SECRET) as {
+//       email: string;
+//     };
+//     return next({ ctx: { ...ctx, user: { email: decoded.email } } });
+//   } catch (error) {
+//     throw new Error("Invalid token");
+//   }
+// });
+
+const isAuthenticated = t.middleware(async ({ ctx, next }) => {
+  const authHeader = ctx?.headers?.get("Authorization");
+  if (!authHeader) {
+    throw new Error("Authorization header missing");
+  }
+  console.log(authHeader);
+  const [, token] = authHeader.split(" ");
+  if (!token) {
+    throw new Error("Authorization token missing");
+  }
+
+  try {
+    const decoded = jwt.verify(token, env.JWT_SECRET) as {
+      email: string;
+    };
+
+    // Get the user ID from the X-User-Id header
+    const userId = ctx?.headers?.get("X-User-Id");
+    if (!userId) {
+      throw new Error("User ID missing in headers");
+    }
+
+    return next({
+      ctx: { ...ctx, user: { email: decoded.email, id: userId } },
+    });
+  } catch (error) {
+    throw new Error("Invalid token");
+  }
+});
+
+export const protectedProcedure = t.procedure.use(isAuthenticated);
 /**
  * Public (unauthenticated) procedure
  *
