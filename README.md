@@ -25,6 +25,7 @@ git clone 'repo name'
 npm install
 
 ```
+```
 npm run prisma:seed
 ```
 probably you'll be connecting to you own database, so seeding will put list of categories into you database
