@@ -280,7 +280,7 @@ const Register: React.FC = () => {
             currentSlide === 1 ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="mb-5 mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5 md:ml-[29%] md:mr-[29%]    lg:ml-[34%] lg:mr-[34%]">
+          <div className="custom-div">
             <form onSubmit={handleOtpForm}>
               <h2 className="text-center text-3xl font-semibold">
                 {" "}
