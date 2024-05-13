@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { sendOTPEmail, successfulRegisteration } from "../../utils/email";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { generateOTP, isOTPExpired } from "~/server/utils/otp";
+import { generateOTP } from "~/server/utils/otp";
 import { PrismaClient } from "@prisma/client";
 import { hashPassword } from "../../utils/password";
 import jwt from "jsonwebtoken";
@@ -45,10 +45,8 @@ export const authRouter = createTRPCRouter({
       const { otp, expirationTime } = generateOTP();
       console.log(otp, expirationTime);
 
-      // Check if an OTP exists for the email
       const existingOTP = await prisma.otp.findFirst({ where: { email } });
       if (existingOTP) {
-        // Update the existing OTP
         await prisma.otp.update({
           where: { id: existingOTP.id },
           data: {
@@ -57,7 +55,6 @@ export const authRouter = createTRPCRouter({
           },
         });
       } else {
-        // Create a new OTP
         await prisma.otp.create({
           data: {
             email: email,
@@ -67,7 +64,6 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      // Send the OTP to the user's email
       await sendOTPEmail(email, otp, name);
 
       return { message: "OTP sent to your email" };
@@ -96,17 +92,14 @@ export const authRouter = createTRPCRouter({
         return { message: "Invalid OTP" };
       }
 
-      // Check if the provided OTP matches the stored OTP
       if (storedOTP.otp !== otp) {
         return { message: "Incorrect OTP" };
       }
 
-      // Check if the OTP has expired
       const currentTime = moment();
       const otpExpiresAt = moment(storedOTP.expiresAt);
 
       if (currentTime.isAfter(otpExpiresAt)) {
-        // throw new Error("OTP has expired");
         return { message: "OTP has expired" };
       }
 

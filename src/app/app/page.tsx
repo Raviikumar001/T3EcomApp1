@@ -3,7 +3,7 @@
 
 import SkeletonLoader from "../_components/skeleton";
 import React, { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+
 import { Header } from "../_components/header";
 import { api } from "~/trpc/react";
 import toast, { Toaster } from "react-hot-toast";

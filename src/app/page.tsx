@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-import { api } from "~/trpc/server";
 import ShopKart from "./_components/SvgFiles";
 export default async function Home() {
   // const hello = await api.auth.signup({
