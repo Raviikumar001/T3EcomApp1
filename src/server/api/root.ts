@@ -1,4 +1,3 @@
-import { postRouter } from "~/server/api/routers/post";
 import { authRouter } from "~/server/api/routers/auth";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { categoryRouter } from "~/server/api/routers/category";
@@ -9,7 +8,7 @@ import { categoryRouter } from "~/server/api/routers/category";
  */
 export const appRouter = createTRPCRouter({
   auth: authRouter,
-  post: postRouter,
+
   categories: categoryRouter,
 });
 

@@ -1,5 +1,7 @@
 // @ts-nocheck
 "use client";
+
+import SkeletonLoader from "../_components/skeleton";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Header } from "../_components/header";
@@ -12,7 +14,7 @@ const MainApp = () => {
   const [startPage, setStartPage] = useState(1);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
 
-  const { data } = api.categories.getAllCategories.useQuery({
+  const { data, isLoading } = api.categories.getAllCategories.useQuery({
     page: currentPage,
   });
 
@@ -72,6 +74,7 @@ const MainApp = () => {
     <div>
       <Toaster position="top-right" reverseOrder={false} />
       <Header />
+
       <div className="mb-5 ml-[35%] mr-[35%] mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
         <h2 className="mt-5 text-center text-3xl font-bold">
           Please mark your interests!
@@ -84,74 +87,79 @@ const MainApp = () => {
             <li key={category.id}>{category?.name}</li>
           ))}
         </ul> */}
+        {isLoading ? (
+          <SkeletonLoader />
+        ) : (
+          <>
+            <ul className="mt-5">
+              {categories.map((category) => (
+                <li key={category.id} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="largerCheckbox bg-grey-700 rounded-md accent-gray-900"
+                    checked={selectedCategoryIds.includes(category.id)}
+                    onChange={() =>
+                      handleCategoryCheckboxChange(parseInt(category.id))
+                    }
+                  />
+                  <span className=" text-lg">{category.name} </span>
+                </li>
+              ))}
+            </ul>
 
-        <ul className="mt-5">
-          {categories.map((category) => (
-            <li key={category.id} className="flex items-center">
-              <input
-                type="checkbox"
-                className="largerCheckbox bg-grey-700 rounded-md accent-gray-900"
-                checked={selectedCategoryIds.includes(category.id)}
-                onChange={() =>
-                  handleCategoryCheckboxChange(parseInt(category.id))
-                }
-              />
-              <span className=" text-lg">{category.name} </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-5 flex items-center justify-start">
-          <button
-            className=" px-1.5 py-1"
-            onClick={() => handlePagination(1)}
-            disabled={currentPage === 1}
-          >
-            {"<<"}
-          </button>
-          <button
-            className="px-1.5 py-1"
-            onClick={() => handlePagination(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            {"<"}
-          </button>
-          {Array.from({ length: Math.min(totalPages, 7) }, (_, index) => {
-            const page = startPage + index;
-            return page <= totalPages ? (
+            <div className="mt-5 flex items-center justify-start">
               <button
-                key={page}
-                className={` px-1.5 py-1 ${
-                  currentPage === page
-                    ? "font-bold text-black"
-                    : "text-gray-600"
-                }`}
-                onClick={() => handlePagination(page)}
+                className=" px-1.5 py-1"
+                onClick={() => handlePagination(1)}
+                disabled={currentPage === 1}
               >
-                {page}
+                {"<<"}
               </button>
-            ) : null;
-          })}
-          {totalPages > 7 && currentPage <= totalPages - 4 && (
-            <span className=" px-1.5 py-1">...</span>
-          )}
-          {totalPages > 7 && (
-            <button
-              className=" px-1.5 py-1"
-              onClick={() => handlePagination(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              {">"}
-            </button>
-          )}
-          <button
-            className=" px-1.5 py-1"
-            onClick={() => handlePagination(totalPages)}
-            disabled={currentPage === totalPages}
-          >
-            {">>"}
-          </button>
-        </div>
+              <button
+                className="px-1.5 py-1"
+                onClick={() => handlePagination(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                {"<"}
+              </button>
+              {Array.from({ length: Math.min(totalPages, 7) }, (_, index) => {
+                const page = startPage + index;
+                return page <= totalPages ? (
+                  <button
+                    key={page}
+                    className={` px-1.5 py-1 ${
+                      currentPage === page
+                        ? "font-bold text-black"
+                        : "text-gray-600"
+                    }`}
+                    onClick={() => handlePagination(page)}
+                  >
+                    {page}
+                  </button>
+                ) : null;
+              })}
+              {totalPages > 7 && currentPage <= totalPages - 4 && (
+                <span className=" px-1.5 py-1">...</span>
+              )}
+              {totalPages > 7 && (
+                <button
+                  className=" px-1.5 py-1"
+                  onClick={() => handlePagination(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  {">"}
+                </button>
+              )}
+              <button
+                className=" px-1.5 py-1"
+                onClick={() => handlePagination(totalPages)}
+                disabled={currentPage === totalPages}
+              >
+                {">>"}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
