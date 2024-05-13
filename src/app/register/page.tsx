@@ -107,18 +107,20 @@ const Register: React.FC = () => {
           setLoading(false);
           console.log(result, "result");
           const { message, token, user } = result;
-          if (message == "OTP verified successfully") toast.success(message);
-          else {
+          if (message == "OTP verified successfully") {
+            toast.success(message);
+            if (token) {
+              localStorage.setItem("token", token);
+              localStorage.setItem("user", JSON.stringify(user));
+            }
+            handleRedirectSlide();
+            setTimeout(() => {
+              router.push("/app");
+            }, 900);
+          } else {
             setMessage(message);
           }
-          if (token) {
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
-          }
-          handleRedirectSlide();
-          setTimeout(() => {
-            router.push("/app");
-          }, 800);
+
           // handleNextSlide();
         }
       } else {
@@ -193,7 +195,7 @@ const Register: React.FC = () => {
             currentSlide === 0 ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="mb-5 ml-[35%] mr-[35%] mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
+          <div className="mb-5 ml-[34%] mr-[34%] mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
             <form onSubmit={handleFormSubmit}>
               <h2 className="text-center text-3xl font-semibold">
                 Create your account
@@ -276,7 +278,7 @@ const Register: React.FC = () => {
             currentSlide === 1 ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="mb-5 ml-[35%] mr-[35%] mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
+          <div className="mb-5 mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5 md:ml-[29%] md:mr-[29%]    lg:ml-[34%] lg:mr-[34%]">
             <form onSubmit={handleOtpForm}>
               <h2 className="text-center text-3xl font-semibold">
                 {" "}
