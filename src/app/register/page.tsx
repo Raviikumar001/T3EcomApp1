@@ -164,12 +164,14 @@ const Register: React.FC = () => {
       if (result) {
         setLoading(false);
         console.log(result, "result");
-        const { message } = result;
-        if (message == "User already verified") setMessage(message);
-        else {
+        const { message, userExists } = result;
+
+        if (result.message === "User already Exists") {
+          setMessage(message);
+        } else {
           toast.success(message);
+          handleNextSlide();
         }
-        handleNextSlide();
       }
     } catch (error) {
       console.log(error);

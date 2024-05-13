@@ -25,11 +25,11 @@ export const authRouter = createTRPCRouter({
 
       const hashedPassword = await hashPassword(password);
 
-      const user = await prisma.user.findFirst({ where: { email } });
+      const user = await prisma.user.findUnique({ where: { email } });
       if (user && user.isVerified) {
-        return { message: "User already Exists" };
+        return { message: "User already Exists", userExists: 1 };
       }
-
+      console.log(user, "user");
       // Create a new user if not found or if not verified
       const newUser = await prisma.user.upsert({
         where: { email },
