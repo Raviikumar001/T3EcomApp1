@@ -62,16 +62,14 @@ export const categoryRouter = createTRPCRouter({
       console.log(userId, "userid");
       const { categoryId } = input;
 
-      // Check if the user already has the category selected
       const existingUserCategory = await prisma.userCategories.findFirst({
         where: {
           userId: parseInt(ctx.user.id, 10),
-          categoryId: categoryId.toString(), // Convert categoryId to string
+          categoryId: categoryId.toString(),
         },
       });
 
       if (existingUserCategory) {
-        // If the category is already selected, remove it
         console.log(existingUserCategory, "exitsting");
         // await prisma.userCategories.delete({
         //   where: {

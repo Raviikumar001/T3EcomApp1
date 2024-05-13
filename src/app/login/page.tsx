@@ -63,7 +63,7 @@ const Login: React.FC = () => {
       }
       console.log(result);
     } catch (error) {
-      console.log(error.result);
+      console.log(error);
       setLoading(false);
       toast("There seems to be an error 😌, try again!", {
         style: {

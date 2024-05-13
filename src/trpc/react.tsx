@@ -43,11 +43,12 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
           headers: () => {
             const headers = new Headers();
             headers.set("x-trpc-source", "nextjs-react");
-            const token = localStorage.getItem("token"); // Get the token from localStorage
-            const user = JSON.parse(localStorage.getItem("user")); // Get the user object from localStorage
+            const token = localStorage.getItem("token");
+            // @ts-ignore
+            const user = JSON.parse(localStorage.getItem("user"));
             if (token) {
-              headers.set("Authorization", `Bearer ${token}`); // Include the token in the Authorization header
-              headers.set("X-User-Id", user.id); // Include the user ID in a separate header
+              headers.set("Authorization", `Bearer ${token}`);
+              headers.set("X-User-Id", user.id);
             }
             return headers;
           },

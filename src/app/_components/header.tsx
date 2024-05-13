@@ -22,7 +22,7 @@ export function Header() {
   const router = useRouter();
   function getUserFromLocaStorage() {
     if (typeof window !== "undefined") {
-      // On the client-side
+      // @ts-ignore
       let a = JSON.parse(localStorage.getItem("user"));
       console.log(a);
       if (a?.name) {

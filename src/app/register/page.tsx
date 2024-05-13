@@ -170,7 +170,7 @@ const Register: React.FC = () => {
         handleNextSlide();
       }
     } catch (error) {
-      console.log(error.result);
+      console.log(error);
       setLoading(false);
       toast("There seems to be an error 😌, try again!", {
         style: {

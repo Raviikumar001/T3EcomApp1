@@ -133,7 +133,7 @@ export const authRouter = createTRPCRouter({
         { email: storedOTP.email },
         env.JWT_SECRET,
         {
-          expiresIn: "1d", // Token expires in 1 hour
+          expiresIn: "1d",
         },
       );
       console.log(token);
@@ -155,7 +155,6 @@ export const authRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       const { email, password } = input;
 
-      // Find the user by email
       const user = await prisma.user.findUnique({
         where: {
           email,
@@ -166,12 +165,10 @@ export const authRouter = createTRPCRouter({
         return { message: "User not found" };
       }
 
-      // Check if the user is verified
       if (!user.isVerified) {
         return { message: "User does not Exists" };
       }
 
-      // Check if the provided password matches the hashed password
       const isPasswordValid = await bcrypt.compare(
         password,
         user.hashedPassword,
@@ -180,12 +177,12 @@ export const authRouter = createTRPCRouter({
         return { message: "Incorrect password" };
       }
 
-      // Generate a JWT token with the user's email as the payload
       const token: string = jwt.sign(
         { email: user.email },
+        // @ts-ignore
         process.env.JWT_SECRET,
         {
-          expiresIn: "1d", // Token expires in 1 day
+          expiresIn: "1d",
         },
       );
 

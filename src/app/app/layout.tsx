@@ -38,12 +38,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </>
     );
   } else {
-    return (
-      <div>
-        {/* Your layout content goes here */}
-
-        {children}
-      </div>
-    );
+    return <div>{children}</div>;
   }
 }

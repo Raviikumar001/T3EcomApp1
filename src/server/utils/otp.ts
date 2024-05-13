@@ -8,6 +8,7 @@ export const generateOTP = () => {
   const buffer = crypto.randomBytes(OTP_LENGTH);
   let otp = "";
   for (let i = 0; i < OTP_LENGTH; i++) {
+    // @ts-ignore
     otp += buffer[i] % 10;
   }
   const expirationTime = moment().add(OTP_EXPIRATION_MINUTES, "minutes");
