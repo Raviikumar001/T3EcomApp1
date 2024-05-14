@@ -9,8 +9,8 @@ const SkeletonLoader = () => {
       <ul className="mt-5">
         {Array.from({ length: 5 }, (_, index) => (
           <li key={index} className="mb-2 flex items-center">
-            <div className="mr-2 h-6 w-4 animate-pulse rounded-full bg-gray-300"></div>
-            <div className="h-6 w-32 animate-pulse bg-gray-300"></div>
+            <div className="mr-2 h-8 w-8 animate-pulse rounded-full bg-gray-300"></div>
+            <div className="h-8 w-36 animate-pulse bg-gray-300"></div>
           </li>
         ))}
       </ul>
