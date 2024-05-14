@@ -149,13 +149,13 @@ const Login: React.FC = () => {
               )}
               {loading ? "Singing in..." : `LOGIN`}
             </button>
-
+            <div className="mt-5 h-[2px] w-full  bg-gray-300"></div>
             <p className="mt-5 text-center text-gray-700">
               {" "}
               Don&apos;t have an Account?{" "}
               <span className="text-black">
                 {" "}
-                <Link href="/register">REGISTER </Link>{" "}
+                <Link href="/register">SIGN UP </Link>{" "}
               </span>
             </p>
           </div>
