@@ -179,6 +179,15 @@ export const authRouter = createTRPCRouter({
         },
       );
 
-      return { message: "Login successful", token, user };
+      const userWithoutPassword = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        isVerified: user.isVerified,
+      };
+
+      return { message: "Login successful", token, user: userWithoutPassword };
     }),
 });
