@@ -1,5 +1,6 @@
 // @ts-nocheck
 "use client";
+import { useQueryClient } from "@tanstack/react-query";
 
 import SkeletonLoader from "../_components/skeleton";
 import React, { useEffect, useState } from "react";
@@ -13,7 +14,7 @@ const MainApp = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [startPage, setStartPage] = useState(1);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
-
+  const queryClient = useQueryClient();
   const { data, isLoading } = api.categories.getAllCategories.useQuery({
     page: currentPage,
   });
@@ -39,6 +40,7 @@ const MainApp = () => {
   const updateUserCategory = api.categories.updateUserCategory.useMutation({
     onSuccess: () => {
       toast.success("Updated cateogry prefrence!");
+      queryClient.invalidateQueries(["getUserCategories"]);
     },
     onError: (error) => {
       console.log(error);
