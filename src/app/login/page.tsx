@@ -79,7 +79,7 @@ const Login: React.FC = () => {
     <div>
       <Toaster position="top-right" reverseOrder={false} />
       <Header />
-      <div className="mb-5 ml-[34%] mr-[34%]  mt-10 rounded-xl  border border-gray-300 pb-5 pl-12  pr-12 pt-5">
+      <div className="mb-5 ml-[34%] mr-[34%] mt-10 rounded-xl  border border-gray-300  pb-5 pl-12 pr-12 pt-5  lg:ml-[35%] lg:mr-[35%]">
         <form onSubmit={handleLoginSubmit}>
           <h2 className=" text-center text-3xl font-semibold">Login</h2>
           <p className="mt-4 text-center text-xl font-medium">
