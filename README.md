@@ -46,6 +46,8 @@ It has a decent limit
 
 you can generate a secure JWT_SECRET online
 DATABASE_URL- must be a postgresql connection url
+For HOST is not req. probably if you using the test version for mail, 
+if you using with a domain then probably you'll get the generated host from you dashboard in https://mailtrap.io/
 
 ## Learn More
 
