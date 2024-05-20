@@ -116,7 +116,7 @@ const Register: React.FC = () => {
             handleRedirectSlide();
             setTimeout(() => {
               router.push("/app");
-            }, 1000);
+            }, 1200);
           } else {
             setMessage(message);
           }
