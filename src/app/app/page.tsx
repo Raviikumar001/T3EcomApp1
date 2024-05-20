@@ -39,7 +39,7 @@ const MainApp = () => {
 
   const updateUserCategory = api.categories.updateUserCategory.useMutation({
     onSuccess: () => {
-      toast.success("Updated cateogry prefrence!");
+      toast.success("Updated category prefrence!");
       queryClient.invalidateQueries(["getUserCategories"]);
     },
     onError: (error) => {
