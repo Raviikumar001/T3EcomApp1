@@ -7,6 +7,7 @@ import LArrow from "../../../public/image/LArrow.svg";
 import RArrow from "../../../public/image/RArrow.svg";
 import Logout from "../../../public/image/logout.png";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const headerLinks = [
@@ -20,6 +21,7 @@ const headerLinks = [
 export function Header() {
   const [name, setName] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
   function getUserFromLocaStorage() {
     if (typeof window !== "undefined") {
       // @ts-expect-error
@@ -42,6 +44,7 @@ export function Header() {
   useEffect(() => {
     getUserFromLocaStorage();
   }, []);
+
   return (
     <>
       <header>
@@ -53,7 +56,7 @@ export function Header() {
           <Link href="#">
             <h2>Orders & Returns</h2>
           </Link>
-          {name && (
+          {name && pathname === "/app" && (
             <Link href="#">
               <h2>Hi, {name}</h2>
             </Link>
@@ -79,7 +82,7 @@ export function Header() {
           <div className="flex gap-3 ">
             <Image className="cursor-pointer" src={search} alt="search" />
             <Image className="cursor-pointer" src={cart} alt="cart" />
-            {name && (
+            {name && pathname === "/app" && (
               <button onClick={logout}>
                 <Image
                   className="cursor-pointer"
@@ -92,7 +95,7 @@ export function Header() {
           </div>
         </div>
         <div className="mt-3 h-10 content-center bg-[#f4f4f4]">
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-5">
             <div>
               <Image src={LArrow} alt="Left arrow" />
             </div>

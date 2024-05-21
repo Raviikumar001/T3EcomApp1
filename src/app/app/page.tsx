@@ -77,7 +77,7 @@ const MainApp = () => {
       <Toaster position="top-right" reverseOrder={false} />
       <Header />
 
-      <div className="mb-5 ml-[35%] mr-[35%] mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
+      <div className="custom-div-app mb-5 mt-10 rounded-xl border border-gray-300 pb-5 pl-12 pr-12 pt-5">
         <h2 className="mt-5 text-center text-3xl font-bold">
           Please mark your interests!
         </h2>
@@ -99,7 +99,7 @@ const MainApp = () => {
                   <input
                     type="checkbox"
                     className="largerCheckbox bg-grey-700 rounded-md accent-gray-900"
-                    checked={selectedCategoryIds.includes(category.id)}
+                    checked={selectedCategoryIds?.includes(category.id)}
                     onChange={() =>
                       handleCategoryCheckboxChange(parseInt(category.id))
                     }
@@ -111,14 +111,14 @@ const MainApp = () => {
 
             <div className="mt-5 flex items-center justify-start">
               <button
-                className=" px-1.5 py-1"
+                className=" px-1.5 py-1 text-gray-500 "
                 onClick={() => handlePagination(1)}
                 disabled={currentPage === 1}
               >
                 {"<<"}
               </button>
               <button
-                className="px-1.5 py-1"
+                className="px-1.5 py-1 text-gray-500"
                 onClick={() => handlePagination(currentPage - 1)}
                 disabled={currentPage === 1}
               >
@@ -129,10 +129,10 @@ const MainApp = () => {
                 return page <= totalPages ? (
                   <button
                     key={page}
-                    className={` px-1.5 py-1 ${
+                    className={` px-1.5 py-1  ${
                       currentPage === page
-                        ? "font-bold text-black"
-                        : "text-gray-600"
+                        ? "font-bold text-black "
+                        : "text-gray-500"
                     }`}
                     onClick={() => handlePagination(page)}
                   >
@@ -141,11 +141,11 @@ const MainApp = () => {
                 ) : null;
               })}
               {totalPages > 7 && currentPage <= totalPages - 4 && (
-                <span className=" px-1.5 py-1">...</span>
+                <span className=" px-1.5 py-1 text-gray-500">...</span>
               )}
               {totalPages > 7 && (
                 <button
-                  className=" px-1.5 py-1"
+                  className=" px-1.5 py-1 text-gray-500"
                   onClick={() => handlePagination(currentPage + 1)}
                   disabled={currentPage === totalPages}
                 >
@@ -153,7 +153,7 @@ const MainApp = () => {
                 </button>
               )}
               <button
-                className=" px-1.5 py-1"
+                className=" px-1.5 py-1 text-gray-500"
                 onClick={() => handlePagination(totalPages)}
                 disabled={currentPage === totalPages}
               >

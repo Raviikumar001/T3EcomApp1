@@ -68,3 +68,28 @@ input.largerCheckbox:checked {
     margin-right: 34%;
   }
 }
+
+.custom-div-app {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1.25rem 3rem;
+  margin: 2.5rem auto 1.25rem;
+  max-width: 42%;
+}
+
+/* Medium screen styles */
+@media (min-width: 768px) {
+  .custom-div-app {
+    margin-left: 32%;
+    margin-right: 32%;
+    margin-bottom: 3%;
+  }
+}
+
+/* Large screen styles */
+@media (min-width: 1400px) {
+  .custom-div-app {
+    margin-left: 35%;
+    margin-right: 35%;
+  }
+}
