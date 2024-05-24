@@ -23,6 +23,15 @@ git clone 'repo name'
 npm install
 
 ```
+Generate and run the Prisma migration to create the tables in your database:
+
+```
+npx prisma migrate dev --name init
+```
+
+
+
+
 ```
 npm run prisma:seed
 ```
